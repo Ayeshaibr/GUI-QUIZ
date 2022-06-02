@@ -90,9 +90,14 @@ class Quiz:
     self.rb4.grid(row=4, sticky=W)
 
     #confirm answer button 
-    self.confirm_button = Button (self.quiz_frame, text = "Confirm", bg="light blue")
+    self.confirm_button = Button (self.quiz_frame, text = "Confirm", bg="light blue", command=self.test_progress)
     self.confirm_button.grid(row=5)
-  
+
+    #score label to show score (test result so far)
+    self.score_label=Label(self.quiz_frame, text="SCORE", font=("TW Cen MT","16"), bg=background_color,)
+    self.score_label.grid(row=6, pady=1)
+    
+    
 
   #Method for Editing the question label and radio buttons to show the next questions data
   def questions_setup(self):
@@ -103,8 +108,10 @@ class Quiz:
     self.rb2.config(text=questions_answers[qnum][2])
     self.rb3.config(text=questions_answers[qnum][3])
     self.rb4.config(text=questions_answers[qnum][4])
-    
 
+  #this is the method that would get invoked when confirm answer button is cicked, to take care of progress 
+  def test_progress(self):
+    global score 
 
 
 
