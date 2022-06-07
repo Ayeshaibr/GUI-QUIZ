@@ -112,7 +112,34 @@ class Quiz:
   #this is the method that would get invoked when confirm answer button is cicked, to take care of progress 
   def test_progress(self):
     global score 
-
+    score=0
+    scr_label = self.score_label
+    choice = self.var1.get()
+    if len(asked)>9: #if question is last
+      if choice == questions_answers[qnum][6]: #if last question answer is correct
+        score +=1
+        scr_label.configure(text=score)
+        self.confirm_button.config(text="Confirm")
+      else: #if last question answer is wrong
+        score +=0
+        scr_label.configure(text="The correct answer is " + questions_answers[qnum][5])
+        self.confirm_button.config(text="Confirm")
+    else: #if not the last question
+      if choice==0: #if user has not made a choice
+        self.confirm_button.config(text="Try again please, you didn't select anything")
+        choice=self.var1.get()
+      else: #if user made a choice AND it is NOT the last question
+        if choice==questions_answers[qnum][6]: #if choice is correct
+          score +=1
+          scr_label.configure(text=score)
+          self.confirm_button.config(text="Confirm")
+          self.questions_setup() #run this method to move to next question
+        else: #if choice is wrong
+          score +=0
+          scr_label.configure(text="The correct answer is " + questions_answers[qnum][5])
+          self.confirm_button.config(text="Confirm")
+          self.questions_setup()
+          
 
 
       
